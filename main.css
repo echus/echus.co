@@ -1,0 +1,121 @@
+/* Button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #002b36;
+  background-color: #2aa198;
+  border: 0px;
+}
+
+/* Base */
+html,
+body {
+  height: 100%;
+  background-color: #073642;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: #839496;
+  font-family: 'Inconsolata', monospace;
+}
+
+/* Colours */
+a {
+  text-decoration: underline;
+  color: #93a1a1;
+}
+
+h1 {
+  color: #d33682;
+  color: #93a1a1;
+}
+
+h2 {
+  color: #93a1a1;
+}
+
+span.comment {
+  background-color: #002b36;
+}
+
+span.yellow {
+  color: #b58900;
+}
+span.cyan {
+  color: #2aa198;
+}
+span.blue {
+  color: #268bd2;
+}
+span.green {
+  color: #859900;
+}
+span.orange {
+  color: #cb4b16;
+}
+span.magenta {
+  color: #d33682;
+}
+span.base01 {
+  color: #586e75;
+}
+span.base0 {
+  color: #839496;
+}
+
+/* Layout */
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+    -webkit-box-align : center;
+  -webkit-align-items : center;
+       -moz-box-align : center;
+       -ms-flex-align : center;
+          align-items : center;
+
+  width: 100%;
+
+         -webkit-box-pack : center;
+            -moz-box-pack : center;
+            -ms-flex-pack : center;
+  -webkit-justify-content : center;
+          justify-content : center;
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.flex-main {
+  flex-grow: 2;
+}
+
+.flex-left {
+  flex-grow: 1;
+}
+
+.flex-right {
+  flex-grow: 1;
+}
+
+/* Cursor */
+.cursor {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
