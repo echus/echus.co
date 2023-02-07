@@ -1,0 +1,32 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      <h1>Hi, I'm Varvara Efremova</h1>
+      <p>
+        I’m an experienced full stack software engineer with a scientific
+        background, passionate about applying software engineering industry best
+        practices to help advance scientific research.
+      </p>
+      <p>
+        I prioritise designing user-focused, modular, maintainable and
+        well-documented applications, as well as establishing good coding
+        practices to ensure project sustainability.
+      </p>
+      <p>You can get in contact with me at <em>varvara (at) echus.co</em>.</p>
+    </main>
+    <Footer />
+  </body>
+</html>
