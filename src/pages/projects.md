@@ -15,20 +15,21 @@ heroImage: "/favicon.svg"
       </a>
     </strong>
   </dt>
-  <dd>A modern data analysis and publication framework for the web.</dd>
-  <dd><code>Ember.js, Python, Docker, Terraform</code></dd>
+  <dd>A declarative data analysis and publication ecosystem.</dd>
 </dl>
 
 <dl>
   <dt>
     <strong>
       <a href="https://www.access-nri.org.au/" target="_blank">
-        ACCESS-NRI - CI/CD for climate models
+        Web solutions for ACCESS-NRI
       </a>
     </strong>
   </dt>
-  <dd>Developing CI/CD pipelines for Fortran-based climate models.</dd>
-  <dd><code>Docker, Github Actions, Spack</code></dd>
+  <dd>
+  Community consultation, architecture and implementation of web services for
+  the ACCESS climate modelling community.
+  </dd>
 </dl>
 
 For more details and past projects check out my [resume](/varvara_efremova_resume.pdf).
