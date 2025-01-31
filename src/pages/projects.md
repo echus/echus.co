@@ -10,26 +10,12 @@ heroImage: "/favicon.svg"
 <dl>
   <dt>
     <strong>
-      <a href="https://opendata.fit" target="_blank">
-        opendata.fit
+      <a href="https://opendata.studio" target="_blank">
+        opendata.studio
       </a>
     </strong>
   </dt>
-  <dd>A declarative data analysis and publication ecosystem.</dd>
-</dl>
-
-<dl>
-  <dt>
-    <strong>
-      <a href="https://www.access-nri.org.au/" target="_blank">
-        Web solutions for ACCESS-NRI
-      </a>
-    </strong>
-  </dt>
-  <dd>
-  Community consultation, architecture and implementation of web services for
-  the ACCESS climate modelling community.
-  </dd>
+  <dd>A web-based declarative data analysis and publication tool.</dd>
 </dl>
 
 For more details and past projects check out my [resume](/varvara_efremova_resume.pdf).
