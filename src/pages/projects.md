@@ -10,12 +10,14 @@ heroImage: "/favicon.svg"
 <dl>
   <dt>
     <strong>
-      <a href="https://opendata.studio" target="_blank">
-        opendata.studio
+      <a href="https://datastudioapp.com" target="_blank">
+        DataStudio
       </a>
     </strong>
   </dt>
-  <dd>A web-based declarative data analysis and publication tool.</dd>
+  <dd>
+  A web-based data analysis and publication platform focused on simplifying scientific analysis workflows and improving reproducibility in research.
+  </dd>
 </dl>
 
 For more details and past projects check out my [resume](/varvara_efremova_resume.pdf).
