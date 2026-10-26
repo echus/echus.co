@@ -240,7 +240,6 @@ h1 {
 /* Contact */
 
 footer {
-  border-top: 1px dashed var(--rule);
   padding: 40px 0 64px;
 }
 
