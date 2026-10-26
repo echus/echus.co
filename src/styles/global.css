@@ -257,10 +257,13 @@ footer p {
     padding: 0 16px;
   }
 
-  header nav a,
+  /* Only the theme toggle fits comfortably next to the logo */
+  header nav a {
+    display: none;
+  }
+
   #theme-toggle {
-    margin-left: 12px;
-    font-size: 13px;
+    margin-left: 0;
   }
 
   .proj .bar {
