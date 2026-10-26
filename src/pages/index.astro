@@ -1,33 +1,151 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/700.css";
+import "@fontsource/jetbrains-mono/800.css";
+import "../styles/global.css";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+const title = "Varvara Efremova";
+const description = "I build software for scientists and researchers.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const projects = [
+  {
+    slug: "datastudio",
+    name: "DataStudio",
+    where: "UNSW Sydney",
+    when: "now",
+    body: "A platform for running, saving and sharing reproducible scientific data analyses.",
+    stack: "python streamlit docker aws",
+    links: [{ label: "datastudioapp.com", href: "https://datastudioapp.com" }],
+  },
+  {
+    slug: "bindfit",
+    name: "Bindfit",
+    where: "UNSW Sydney",
+    when: "2015 – 2016",
+    body: "Binding constant fitting for NMR and UV-Vis titration data. Serving the supramolecular chemistry community since 2016 with 20,000 analysis sessions a year.",
+    stack: "python django postgresql ember.js",
+    links: [
+      { label: "open bindfit", href: "https://app.supramolecular.org/bindfit" },
+      { label: "source", href: "https://github.com/echus/supramolecular-apps" },
+    ],
+  },
+  {
+    slug: "makerspace",
+    name: "Canberra Makerspace",
+    aka: "Make Hack Void",
+    where: "President",
+    when: "2021 – now",
+    body: "A community space for makers, hackers and artists to hang out and share skills and knowledge. We provide tools and a welcoming place to work on anything from electronics and radio to sculpting and welding.",
+    links: [{ label: "canberramaker.space", href: "https://canberramaker.space" }],
+  },
+];
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <script is:inline>
+      // Apply a saved theme before first paint so the page doesn't flash
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme) document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
   </head>
   <body>
-    <Header title={SITE_TITLE} />
-    <main>
-      <h1>Hi, I'm Varvara 👋</h1>
-      <h3>
-      I build research software for humans 👩🏼‍💻
-      </h3>
-      <p>
-      I'm a software engineer with a physics background who specialises in creating easy-to-use software for research data analysis and visualisation.
-      </p>
-      <p>
-      I prioritise designing user-focused, modular, maintainable and well-documented software systems, as well as establishing good engineering practices to ensure long term sustainability. 
-      </p>
-      <p>
-      Get in touch with me at <em>varvara (at) echus.co</em>.
-      </p>
-    </main>
-    <Footer />
+    <div class="wrap">
+      <header class="top">
+        <span class="logo"><span class="prompt">&gt;_</span> echus</span>
+        <nav>
+          <a href="#work">work</a>
+          <a href="https://github.com/echus">github</a>
+          <a href="#contact">contact</a>
+          <button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <p class="cmd"><span class="prompt">~ $</span> whoami</p>
+          <h1>Hi, I'm Varvara.<span class="cursor"></span></h1>
+          <p>I build software for scientists and researchers.</p>
+        </section>
+
+        <section id="work">
+          <p class="cmd"><span class="prompt">~ $</span> ls -l projects/</p>
+          <p class="total">total {projects.length}</p>
+
+          {
+            projects.map((p) => (
+              <article class="proj">
+                <div class="bar">
+                  <span>
+                    <b>{p.slug}</b> · {p.where}
+                  </span>
+                  <span>{p.when}</span>
+                </div>
+                <div class="body">
+                  <h2>{p.name}</h2>
+                  {p.aka && <p class="aka">aka {p.aka}</p>}
+                  <p>{p.body}</p>
+                  {p.stack && <p class="stack">{p.stack}</p>}
+                  <div class="links">
+                    {p.links.map((l) => (
+                      <a href={l.href}>{l.label}</a>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </section>
+      </main>
+
+      <footer id="contact">
+        <p class="cmd"><span class="prompt">~ $</span> contact</p>
+        <div class="links">
+          <a href="mailto:varvara@echus.co">varvara@echus.co</a>
+          <a href="https://github.com/echus">github.com/echus</a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const root = document.documentElement;
+      const toggle = document.getElementById("theme-toggle")!;
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+      const current = () =>
+        root.dataset.theme ?? (systemDark.matches ? "dark" : "light");
+
+      const render = () => {
+        const theme = current();
+        toggle.textContent = `[${theme}]`;
+        toggle.setAttribute("aria-pressed", String(theme === "dark"));
+      };
+
+      toggle.addEventListener("click", () => {
+        const next = current() === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem("theme", next);
+        } catch {}
+        render();
+      });
+      systemDark.addEventListener("change", render);
+      render();
+    </script>
   </body>
 </html>
