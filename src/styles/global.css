@@ -326,6 +326,29 @@ footer p {
   max-width: 60ch;
 }
 
+footer .tip {
+  margin-top: 36px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer .tip a {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  transition: color 0.25s ease;
+}
+
+footer .tip a:hover {
+  color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  footer .tip a {
+    transition: none;
+  }
+}
+
 @media (max-width: 640px) {
   body {
     font-size: 14px;
