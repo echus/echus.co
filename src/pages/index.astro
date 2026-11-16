@@ -29,30 +29,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const projects: Project[] = [
   {
-    slug: "datastudio",
-    name: "DataStudio",
-    where: "UNSW Sydney",
-    when: "now",
-    body: "A platform for running, saving and sharing reproducible scientific data analyses.",
-    stack: "python streamlit docker aws",
-    shot: dataStudioShot,
-    links: [{ label: "datastudioapp.com", href: "https://datastudioapp.com" }],
-  },
-  {
-    slug: "bindfit",
-    name: "Bindfit",
-    where: "UNSW Sydney",
-    when: "2016",
-    body: "Binding constant fitting for NMR and UV-Vis titration data. Serving the supramolecular chemistry community since 2016 with 20,000 analysis sessions a year.",
-    stack: "python django postgresql ember.js",
-    shot: bindfitShot,
-    links: [
-      { label: "bindfit app", href: "https://app.supramolecular.org/bindfit" },
-      { label: "supramolecular.org", href: "https://supramolecular.org" },
-      { label: "source", href: "https://github.com/echus/supramolecular-apps" },
-    ],
-  },
-  {
     slug: "dumb-tasks",
     name: "Dumb Tasks",
     where: "Personal",
@@ -76,6 +52,30 @@ const projects: Project[] = [
     links: [
       { label: "wallpaper.echus.co", href: "https://wallpaper.echus.co" },
       { label: "source", href: "https://github.com/echus/cyberpunk-wallpaper-generator" },
+    ],
+  },
+  {
+    slug: "datastudio",
+    name: "DataStudio",
+    where: "UNSW Sydney",
+    when: "now",
+    body: "A platform for running, saving and sharing reproducible scientific data analyses.",
+    stack: "python streamlit docker aws",
+    shot: dataStudioShot,
+    links: [{ label: "datastudioapp.com", href: "https://datastudioapp.com" }],
+  },
+  {
+    slug: "bindfit",
+    name: "Bindfit",
+    where: "UNSW Sydney",
+    when: "2016",
+    body: "Binding constant fitting for NMR and UV-Vis titration data. Serving the supramolecular chemistry community since 2016 with 20,000 analysis sessions a year.",
+    stack: "python django postgresql ember.js",
+    shot: bindfitShot,
+    links: [
+      { label: "bindfit app", href: "https://app.supramolecular.org/bindfit" },
+      { label: "supramolecular.org", href: "https://supramolecular.org" },
+      { label: "source", href: "https://github.com/echus/supramolecular-apps" },
     ],
   },
   {
