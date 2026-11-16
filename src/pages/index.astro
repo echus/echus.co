@@ -5,11 +5,6 @@ import "@fontsource/jetbrains-mono/800.css";
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import dataStudioShot from "../assets/projects/datastudio.png";
-import bindfitShot from "../assets/projects/bindfit.png";
-import dumbTasksShot from "../assets/projects/dumb-tasks.png";
-import wallpaperShot from "../assets/projects/wallpaper.png";
-import makerspaceShot from "../assets/projects/makerspace.png";
 
 type Project = {
   slug: string;
@@ -19,13 +14,20 @@ type Project = {
   when: string;
   body: string;
   stack?: string;
-  shot?: ImageMetadata;
   links: { label: string; href: string }[];
 };
 
 const title = "Varvara Efremova | Software developer person";
 const description = "I build software for scientists and researchers (and also for fun).";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Screenshots from scripts/screenshots.js: <slug>.png, or <slug>-dark.png and <slug>-light.png
+const images = import.meta.glob<ImageMetadata>("../assets/projects/*.png", { eager: true, import: "default" });
+const shotsOf = (slug: string) =>
+  ["", "dark", "light"].flatMap((theme) => {
+    const src = images[`../assets/projects/${slug}${theme && `-${theme}`}.png`];
+    return src ? [{ src, theme }] : [];
+  });
 
 const projects: Project[] = [
   {
@@ -35,7 +37,6 @@ const projects: Project[] = [
     when: "2026",
     body: "A really simple local-first task list, with optional sync via WebDAV or Google Drive.",
     stack: "typescript svelte indexeddb",
-    shot: dumbTasksShot,
     links: [
       { label: "dumbtasks.app", href: "https://dumbtasks.app" },
       { label: "source", href: "https://github.com/echus/dumb-tasks" },
@@ -48,9 +49,6 @@ const projects: Project[] = [
     when: "2026",
     body: "A minimal cyberpunk wallpaper generator.",
     stack: "javascript canvas",
-    // Captured in a 1200x900 window, resized to 800x600:
-    // https://wallpaper.echus.co/?seed=570791&device=custom&w=1600&h=1200&colour=sodium&accents=99&glitch=0.5
-    shot: wallpaperShot,
     links: [
       { label: "wallpaper.echus.co", href: "https://wallpaper.echus.co" },
       { label: "source", href: "https://github.com/echus/cyberpunk-wallpaper-generator" },
@@ -63,7 +61,6 @@ const projects: Project[] = [
     when: "now",
     body: "A platform for running, saving and sharing reproducible scientific data analyses.",
     stack: "python streamlit docker aws",
-    shot: dataStudioShot,
     links: [{ label: "datastudioapp.com", href: "https://datastudioapp.com" }],
   },
   {
@@ -73,7 +70,6 @@ const projects: Project[] = [
     when: "2016",
     body: "Binding constant fitting for NMR and UV-Vis titration data. Serving the supramolecular chemistry community since 2016 with 20,000 analysis sessions a year.",
     stack: "python django postgresql ember.js",
-    shot: bindfitShot,
     links: [
       { label: "bindfit app", href: "https://app.supramolecular.org/bindfit" },
       { label: "supramolecular.org", href: "https://supramolecular.org" },
@@ -87,7 +83,6 @@ const projects: Project[] = [
     where: "President",
     when: "2021 – now",
     body: "A community space for makers, hackers and artists to hang out and share skills and knowledge. We provide tools and a welcoming place to work on anything from electronics and radio to sculpting and welding.",
-    shot: makerspaceShot,
     links: [{ label: "canberramaker.space", href: "https://canberramaker.space" }],
   },
 ];
@@ -159,16 +154,17 @@ const projects: Project[] = [
                       ))}
                     </div>
                   </div>
-                  {p.shot && (
-                    <div class="shot">
+                  <div class="shot">
+                    {shotsOf(p.slug).map(({ src, theme }) => (
                       <Image
-                        src={p.shot}
+                        src={src}
+                        class={theme || undefined}
                         alt={`${p.name} screenshot`}
                         widths={[267, 534]}
                         sizes="(max-width: 640px) 100vw, 267px"
                       />
-                    </div>
-                  )}
+                    ))}
+                  </div>
                 </div>
               </article>
             ))

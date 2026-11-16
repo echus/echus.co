@@ -9,6 +9,9 @@
   --accent: #ff6a1f;
   /* Orange for text, slightly darker in light mode */
   --accent-text: #ff6a1f;
+  /* Which screenshot of an app with dark and light modes shows */
+  --dark-shot: block;
+  --light-shot: none;
   color-scheme: dark;
 }
 
@@ -20,6 +23,8 @@
     --muted: #5f6269;
     --rule: #d4d4d8;
     --accent-text: #e85a14;
+    --dark-shot: none;
+    --light-shot: block;
     color-scheme: light;
   }
 }
@@ -31,6 +36,8 @@
   --muted: #5f6269;
   --rule: #d4d4d8;
   --accent-text: #e85a14;
+  --dark-shot: none;
+  --light-shot: block;
   color-scheme: light;
 }
 
@@ -247,6 +254,14 @@ h1 {
   object-position: top left;
   border: 1px solid var(--rule);
   border-radius: 4px;
+}
+
+.proj .shot .dark {
+  display: var(--dark-shot);
+}
+
+.proj .shot .light {
+  display: var(--light-shot);
 }
 
 .proj h2 {
