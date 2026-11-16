@@ -253,6 +253,22 @@ h1 {
   text-decoration: none;
 }
 
+/* The heading link covers the whole panel. Other links sit above it. */
+.proj {
+  position: relative;
+}
+
+.proj h2 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.proj .links a {
+  position: relative;
+  z-index: 1;
+}
+
 .proj h2::before {
   content: "./";
   color: var(--muted);
