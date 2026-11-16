@@ -1,5 +1,4 @@
-/* Dark is the default. Light applies when the system prefers it, unless the
-   toggle has set data-theme="dark", or whenever the toggle sets "light". */
+/* Dark is the default. Light applies only when the toggle sets data-theme="light". */
 :root {
   --bg: #121314;
   --panel: #1a1b1e;
@@ -13,20 +12,6 @@
   --dark-shot: block;
   --light-shot: none;
   color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f1f1f2;
-    --panel: #e6e6e9;
-    --ink: #1b1c1f;
-    --muted: #5f6269;
-    --rule: #d4d4d8;
-    --accent-text: #e85a14;
-    --dark-shot: none;
-    --light-shot: block;
-    color-scheme: light;
-  }
 }
 
 :root[data-theme="light"] {
@@ -184,8 +169,7 @@ h1 {
 .proj {
   border: 1px solid var(--rule);
   background: var(--panel);
-  border-radius: 6px;
-  margin-bottom: 18px;
+  margin-bottom: 60px;
   overflow: hidden;
   transition:
     background-color 0.25s ease,
@@ -339,29 +323,6 @@ footer {
 footer p {
   margin: 0 0 6px;
   max-width: 60ch;
-}
-
-footer .tip {
-  margin-top: 36px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-footer .tip a {
-  color: inherit;
-  text-decoration: underline dotted;
-  text-underline-offset: 3px;
-  transition: color 0.25s ease;
-}
-
-footer .tip a:hover {
-  color: var(--accent-text);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  footer .tip a {
-    transition: none;
-  }
 }
 
 @media (max-width: 640px) {

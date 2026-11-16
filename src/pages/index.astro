@@ -177,20 +177,15 @@ const projects: Project[] = [
         <div class="links">
           <a href="mailto:varvara@echus.co">varvara@echus.co</a>
           <a href="https://github.com/echus">github.com/echus</a>
+          <a href="https://ko-fi.com/echus">ko-fi.com/echus</a>
         </div>
-        <p class="tip">
-          # echus is powered by naps. <a href="https://ko-fi.com/echus">donate one?</a>
-        </p>
       </footer>
     </div>
 
     <script>
       const root = document.documentElement;
       const toggle = document.getElementById("theme-toggle")!;
-      const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-      const current = () =>
-        root.dataset.theme ?? (systemDark.matches ? "dark" : "light");
+      const current = () => root.dataset.theme ?? "dark";
 
       const render = () => {
         const theme = current();
@@ -206,7 +201,6 @@ const projects: Project[] = [
         } catch {}
         render();
       });
-      systemDark.addEventListener("change", render);
       render();
     </script>
   </body>
