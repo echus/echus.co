@@ -190,13 +190,44 @@ h1 {
 }
 
 .proj .body {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
   padding: 18px 18px 20px;
+}
+
+.proj .text {
+  flex: 1;
+  min-width: 0;
+}
+
+.proj .shot {
+  flex: 0 0 267px;
+  align-self: center;
+  line-height: 0;
+}
+
+.proj .shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top left;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
 }
 
 .proj h2 {
   font-size: 22px;
   font-weight: 700;
   margin: 0 0 10px;
+}
+
+.proj h2 a,
+.proj h2 a:hover {
+  color: inherit;
+  text-decoration: none;
 }
 
 .proj h2::before {
@@ -269,5 +300,16 @@ footer p {
   .proj .bar {
     flex-direction: column;
     gap: 0;
+  }
+
+  .proj .body {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .proj .shot {
+    flex-basis: auto;
+    width: 100%;
+    align-self: stretch;
   }
 }
