@@ -89,12 +89,20 @@ header nav a,
   color: var(--muted);
   margin-left: 20px;
   font-size: 14px;
+  transition: color 0.25s ease;
 }
 
 header nav a:hover,
 #theme-toggle:hover {
-  color: var(--ink);
+  color: var(--accent-text);
   text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header nav a,
+  #theme-toggle {
+    transition: none;
+  }
 }
 
 #theme-toggle {
