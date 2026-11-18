@@ -11,7 +11,7 @@ const APPS = [
   { slug: "dumb-tasks", url: "https://dumbtasks.app", themes: true },
   {
     slug: "wallpaper",
-    url: "https://wallpaper.echus.co/?seed=570791&device=custom&w=1600&h=1200&colour=sodium&accents=99&glitch=0.5&mode={theme}",
+    url: "https://wallpaper.echus.co/?seed=570791&device=custom&w=1600&h=1200&colour=rhodamine&accents=99&glitch=0.5&mode={theme}",
     themes: true,
   },
   {
