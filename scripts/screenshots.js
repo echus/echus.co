@@ -1,6 +1,7 @@
 // Makes the project screenshots in src/assets/projects/. An app with dark and light modes gets
 // <slug>-dark.png and <slug>-light.png, and the page shows the one that matches its theme.
-// Other apps get <slug>.png. The page crops each shot to 4:3 from the top left.
+// Other apps get <slug>.png. Most apps follow the system theme. An app that takes its theme from the
+// address has {theme} in its URL. The page crops each shot to 4:3 from the top left.
 // Run it with `npm run screenshots`, or `npm run screenshots -- bindfit` for some apps only.
 // It uses the installed Chrome, or the browser at CHROME.
 
@@ -10,7 +11,8 @@ const APPS = [
   { slug: "dumb-tasks", url: "https://dumbtasks.app", themes: true },
   {
     slug: "wallpaper",
-    url: "https://wallpaper.echus.co/?seed=570791&device=custom&w=1600&h=1200&colour=sodium&accents=99&glitch=0.5",
+    url: "https://wallpaper.echus.co/?seed=570791&device=custom&w=1600&h=1200&colour=sodium&accents=99&glitch=0.5&mode={theme}",
+    themes: true,
   },
   {
     slug: "datastudio",
@@ -36,7 +38,7 @@ const browser = await chromium.launch(
 
 async function shoot({ slug, url, window: [width, height] = [1200, 900], click, video }, theme) {
   const page = await browser.newPage({ viewport: { width, height }, colorScheme: theme ?? "light" });
-  await page.goto(url);
+  await page.goto(url.replace("{theme}", theme));
   // Wait for apps that load their content after the page
   await page.waitForTimeout(5000);
   if (click) {
