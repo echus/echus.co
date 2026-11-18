@@ -3,8 +3,10 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/700.css";
 import "@fontsource/jetbrains-mono/800.css";
 import "../styles/global.css";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import backgroundDark from "../assets/background-dark.png";
+import backgroundLight from "../assets/background-light.png";
 
 type Project = {
   slug: string;
@@ -20,6 +22,13 @@ type Project = {
 const title = "Varvara Efremova | Software developer person";
 const description = "I build software for scientists and researchers (and also for fun).";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Wallpapers from https://wallpaper.echus.co/?seed=488892&device=custom&w=2560&h=1440&colour=sodium&mode=dark&accents=3&glitch=1
+// and the same address with mode=light. The >>>>> arrows behind the intro (x 1112-1189, y 537-566)
+// are removed by hand: covered with the empty patch just above them.
+const [wallpaperDark, wallpaperLight] = await Promise.all(
+  [backgroundDark, backgroundLight].map((src) => getImage({ src, format: "webp" })),
+);
 
 // Screenshots from scripts/screenshots.js: <slug>.png, or <slug>-dark.png and <slug>-light.png
 const images = import.meta.glob<ImageMetadata>("../assets/projects/*.png", { eager: true, import: "default" });
@@ -89,7 +98,10 @@ const projects: Project[] = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang="en"
+  style={`--wallpaper-dark: url(${wallpaperDark.src}); --wallpaper-light: url(${wallpaperLight.src})`}
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />

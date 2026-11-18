@@ -11,6 +11,8 @@
   /* Which screenshot of an app with dark and light modes shows */
   --dark-shot: block;
   --light-shot: none;
+  /* The page sets both wallpapers on <html> */
+  --wallpaper: var(--wallpaper-dark);
   color-scheme: dark;
 }
 
@@ -23,6 +25,7 @@
   --accent-text: #e85a14;
   --dark-shot: none;
   --light-shot: block;
+  --wallpaper: var(--wallpaper-light);
   color-scheme: light;
 }
 
@@ -36,6 +39,21 @@ body {
   color: var(--ink);
   font: 400 15px/1.7 "JetBrains Mono", ui-monospace, monospace;
   -webkit-text-size-adjust: 100%;
+}
+
+/* The wallpaper stays still while the page scrolls. A fixed layer works on phones too,
+   where background-attachment: fixed does not. It is as tall as the screen with the browser
+   bars hidden, so no gap shows at the bottom while they slide away. */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  z-index: -1;
+  background: var(--wallpaper) center / cover;
 }
 
 a {
@@ -166,9 +184,13 @@ h1 {
   margin: 0 0 18px;
 }
 
+/* Panels let the wallpaper show through them, blurred */
 .proj {
+  --glass: color-mix(in srgb, var(--panel) 60%, transparent);
   border: 1px solid var(--rule);
-  background: var(--panel);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   margin-bottom: 60px;
   overflow: hidden;
   transition:
@@ -178,7 +200,7 @@ h1 {
 
 .proj:hover {
   border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, var(--panel));
+  background: color-mix(in srgb, var(--accent) 8%, var(--glass));
 }
 
 .proj .bar {
