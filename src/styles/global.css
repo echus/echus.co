@@ -5,9 +5,9 @@
   --ink: #e3e4e6;
   --muted: #888b92;
   --rule: #2a2b2f;
-  --accent: #ff6a1f;
-  /* Orange for text, slightly darker in light mode */
-  --accent-text: #ff6a1f;
+  --accent: #ff0f80;
+  /* Pink for text, slightly darker in light mode */
+  --accent-text: #ff0f80;
   /* Which screenshot of an app with dark and light modes shows */
   --dark-shot: block;
   --light-shot: none;
@@ -22,7 +22,7 @@
   --ink: #1b1c1f;
   --muted: #5f6269;
   --rule: #d4d4d8;
-  --accent-text: #e85a14;
+  --accent-text: #d10066;
   --dark-shot: none;
   --light-shot: block;
   --wallpaper: var(--wallpaper-light);
