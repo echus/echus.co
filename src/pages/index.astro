@@ -198,15 +198,16 @@ const projects: Project[] = [
       const root = document.documentElement;
       const toggle = document.getElementById("theme-toggle")!;
       const current = () => root.dataset.theme ?? "dark";
+      const other = () => (current() === "dark" ? "light" : "dark");
 
+      // The label names the theme a click switches to
       const render = () => {
-        const theme = current();
-        toggle.textContent = `[${theme}]`;
-        toggle.setAttribute("aria-pressed", String(theme === "dark"));
+        toggle.textContent = `[${other()}]`;
+        toggle.setAttribute("aria-pressed", String(current() === "dark"));
       };
 
       toggle.addEventListener("click", () => {
-        const next = current() === "dark" ? "light" : "dark";
+        const next = other();
         root.dataset.theme = next;
         try {
           localStorage.setItem("theme", next);
