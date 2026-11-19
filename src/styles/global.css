@@ -1,4 +1,4 @@
-/* Dark is the default. Light applies only when the toggle sets data-theme="light". */
+/* The theme follows the system setting. The toggle sets data-theme to override it. */
 :root {
   --bg: #121314;
   --panel: #1a1b1e;
@@ -27,6 +27,22 @@
   --light-shot: block;
   --wallpaper: var(--wallpaper-light);
   color-scheme: light;
+}
+
+/* Same as above. A media query can't share a selector list with the rule above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f1f1f2;
+    --panel: #e6e6e9;
+    --ink: #1b1c1f;
+    --muted: #5f6269;
+    --rule: #d4d4d8;
+    --accent-text: #d10066;
+    --dark-shot: none;
+    --light-shot: block;
+    --wallpaper: var(--wallpaper-light);
+    color-scheme: light;
+  }
 }
 
 * {
