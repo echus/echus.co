@@ -22,6 +22,19 @@ type Project = {
 const title = "Varvara Efremova | Software developer person";
 const description = "I build software for scientists and researchers (and also for fun).";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Link preview image from scripts/og-image.js
+const ogImage = new URL("/og.jpg", Astro.site);
+
+// Tells search engines who the site belongs to and which profiles are the same person
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Varvara Efremova",
+  url: canonicalURL,
+  jobTitle: "Software developer",
+  description,
+  sameAs: ["https://github.com/echus", "https://ko-fi.com/echus"],
+};
 
 // Wallpapers from https://wallpaper.echus.co/?seed=488892&device=custom&w=2560&h=1440&colour=rhodamine&mode=dark&accents=3&glitch=1
 // and the same address with mode=light. The >>>>> arrows behind the intro (x 1112-1189, y 537-566)
@@ -114,6 +127,12 @@ const projects: Project[] = [
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Hi, I'm V. ${description}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
     <script is:inline>
       // Apply a saved theme before first paint so the page doesn't flash
       try {
