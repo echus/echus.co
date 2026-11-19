@@ -137,9 +137,94 @@ const projects: Project[] = [
       <main>
         <section class="hero">
           <p class="cmd"><span class="prompt">~ $</span> whoami</p>
-          <h1>Hi, I'm V.<span class="cursor"></span></h1>
-          <p>{description}</p>
+          <h1><span data-type>Hi, I'm <span class="v">V</span>.</span><span class="cursor"></span></h1>
+          <p class="hero-desc">{description}</p>
         </section>
+
+        <script is:inline>
+          // Type the heading once, like a shell, while the rest fades in. It runs before first paint,
+          // so the full text never flashes. Screen readers get the heading whole from a hidden copy.
+          (() => {
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            // Hides the projects until they rise in. They come after this script, so CSS does it.
+            const root = document.documentElement;
+            root.classList.add("intro");
+            const hero = document.querySelector(".hero");
+            const cursor = hero.querySelector(".cursor");
+            const h1 = hero.querySelector("h1");
+            const cmd = hero.querySelector(".cmd");
+            const desc = hero.querySelector(".hero-desc");
+
+            const lines = [...hero.querySelectorAll("[data-type]")].map((el) => {
+              const html = el.innerHTML;
+              const text = el.textContent;
+              const copy = document.createElement("span");
+              copy.className = "sr-only";
+              copy.textContent = text;
+              const shown = document.createElement("span");
+              shown.setAttribute("aria-hidden", "true");
+              const chars = [...text].map((c) => {
+                const s = document.createElement("span");
+                s.className = "ghost";
+                s.textContent = c;
+                shown.append(s);
+                return s;
+              });
+              el.replaceChildren(copy, shown);
+              return { el, html, shown, chars };
+            });
+
+            const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+            const typeLine = async ({ shown, chars }, speed) => {
+              shown.prepend(cursor);
+              for (const c of chars) {
+                await sleep(speed * (0.6 + Math.random() * 0.8));
+                c.classList.remove("ghost");
+                c.after(cursor);
+              }
+            };
+
+            cmd.classList.add("pending");
+            desc.classList.add("pending");
+            cursor.classList.add("solid");
+            (async () => {
+              await sleep(150);
+              // The prompt fades in and the projects rise in one after another while the heading types
+              cmd.classList.remove("pending");
+              document.querySelectorAll("#work > *").forEach((el, i) => el.style.setProperty("--i", i));
+              root.classList.replace("intro", "reveal");
+
+              await sleep(150);
+              await typeLine(lines[0], 40);
+              // Back to the plain markup the page shipped with
+              for (const { el, html } of lines) el.innerHTML = html;
+              h1.append(cursor);
+              cursor.classList.remove("solid");
+              h1.classList.add("glitch");
+              desc.classList.remove("pending");
+              await sleep(300);
+              h1.classList.remove("glitch");
+
+              // Now and then the V glitches on its own
+              const v = h1.querySelector(".v");
+              const glitchV = async () => {
+                v.classList.add("glitch-v");
+                await sleep(240);
+                v.classList.remove("glitch-v");
+              };
+              for (;;) {
+                await sleep(2000 + Math.random() * 3000);
+                if (document.hidden) continue;
+                await glitchV();
+                // Sometimes it stutters twice
+                if (Math.random() < 0.3) {
+                  await sleep(80);
+                  await glitchV();
+                }
+              }
+            })();
+          })();
+        </script>
 
         <section id="work">
           <p class="cmd"><span class="prompt">~ $</span> ls -l projects/</p>

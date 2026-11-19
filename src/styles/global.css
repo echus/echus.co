@@ -188,6 +188,101 @@ h1 {
   margin: 0 0 14px;
 }
 
+/* Typing intro, run by the script after the hero */
+
+.ghost {
+  visibility: hidden;
+}
+
+/* The cursor stays lit while it types, like a real shell */
+.cursor.solid {
+  animation: none;
+}
+
+.hero .cmd,
+.hero-desc {
+  transition: opacity 0.4s ease;
+}
+
+.hero .pending {
+  opacity: 0;
+}
+
+/* One quick colour split on the finished line */
+h1.glitch {
+  animation: glitch 0.24s steps(1) 1;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow:
+      3px 0 var(--accent),
+      -3px 0 color-mix(in srgb, var(--ink) 50%, transparent);
+    transform: translateX(-1px);
+  }
+  33% {
+    text-shadow:
+      -2px 0 var(--accent),
+      2px 0 color-mix(in srgb, var(--ink) 50%, transparent);
+    transform: translateX(1px);
+  }
+  66% {
+    text-shadow: none;
+    transform: none;
+  }
+}
+
+/* The V glitches now and then after the intro: the same colour split as above, with a little blur.
+   inline-block lets the letter shift sideways. */
+.v {
+  display: inline-block;
+}
+
+.v.glitch-v {
+  animation:
+    glitch 0.24s steps(1) 1,
+    glitch-blur 0.24s steps(1) 1;
+}
+
+@keyframes glitch-blur {
+  0% {
+    filter: blur(1px);
+  }
+  33% {
+    filter: blur(0.5px);
+  }
+  66% {
+    filter: none;
+  }
+}
+
+/* The projects rise in one by one as the intro starts typing. "backwards" holds only the
+   start frame, so nothing stays on the cards afterwards. */
+.intro #work > * {
+  opacity: 0;
+}
+
+.reveal #work > * {
+  animation: rise 0.4s ease backwards;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Projects */
 
 #work {
